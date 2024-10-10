@@ -22,4 +22,5 @@ public class Config {
 
     public static final int NORMAL_COST = 1;
 
+    public static final int PRIM_STEP = 1;
 }
