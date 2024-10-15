@@ -6,8 +6,10 @@ import backend.academy.dto.Coordinate;
 import backend.academy.dto.Maze;
 import backend.academy.generators.Generator;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Генератор лабиринта с использованием алгоритма Прима.
@@ -70,14 +72,17 @@ public class PrimMazeGenerator implements Generator {
         grid[startRow][startCol] = new Cell(startRow, startCol, Cell.Type.PASSAGE, Cell.Surface.randomSurface(random));
 
         // Инициализация списка стен соседями стартовой клетки
-        List<Cell> wallList = new ArrayList<>();
+        Set<Cell> wallList = new HashSet<>();
         for (Coordinate coord : getNeighbors(startRow, startCol, grid, Cell.Type.WALL, Config.PRIM_STEP)) {
             wallList.add(grid[coord.row()][coord.col()]);
         }
 
         // Основной цикл алгоритма Прима
         while (!wallList.isEmpty()) {
-            Cell wall = wallList.remove(random.nextInt(wallList.size()));
+            Cell[] walls = wallList.toArray(new Cell[0]);
+            Cell wall = walls[random.nextInt(walls.length)];
+            wallList.remove(wall);
+
             int row = wall.row();
             int col = wall.col();
 
@@ -95,10 +100,7 @@ public class PrimMazeGenerator implements Generator {
 
                 // Добавление соседних стен в список стен
                 for (Coordinate coord : getNeighbors(row, col, grid, Cell.Type.WALL, Config.PRIM_STEP)) {
-                    Cell neighborWall = grid[coord.row()][coord.col()];
-                    if (!wallList.contains(neighborWall)) {
-                        wallList.add(neighborWall);
-                    }
+                    wallList.add(grid[coord.row()][coord.col()]);
                 }
             }
         }

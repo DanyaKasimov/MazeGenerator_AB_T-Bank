@@ -54,7 +54,7 @@ public class UserInterfaceImplTest {
 
         verify(controller, times(2)).read(anyString());
 
-        verify(controller).write("Высота должна быть больше единицы.");
+        verify(controller).write("Высота должна быть больше двойки.");
 
         assertEquals(5, height);
     }

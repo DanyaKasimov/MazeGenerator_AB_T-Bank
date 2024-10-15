@@ -57,10 +57,10 @@ public class UserInterfaceImpl implements UserInterface {
 
     public int getHeight() {
         int height = 0;
-        while (height < 2) {
+        while (height < 3) {
             height = getValidUserInput("Введите высоту: ");
-            if (height <= 1) {
-                write("Высота должна быть больше единицы.");
+            if (height <= 2) {
+                write("Высота должна быть больше двойки.");
             }
         }
         return height;
