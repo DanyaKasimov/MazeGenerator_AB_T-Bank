@@ -27,18 +27,18 @@ public class UserInterfaceImplTest {
     public void testGetWidth_withInvalidAndValidInputs() {
         when(controller.read(anyString()))
                 .thenReturn("1")
-                .thenReturn("3");
+                .thenReturn("5");
 
         when(controller.isValidNumeric("1")).thenReturn(true);
-        when(controller.isValidNumeric("3")).thenReturn(true);
+        when(controller.isValidNumeric("5")).thenReturn(true);
 
         int width = userInterface.getWidth();
 
         verify(controller, times(2)).read(anyString());
 
-        verify(controller).write("Ширина должна быть больше единицы.");
+        verify(controller).write("Ширина должна быть больше двойки.");
 
-        assertEquals(3, width);
+        assertEquals(5, width);
     }
 
     @Test
