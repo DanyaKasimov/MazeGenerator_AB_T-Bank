@@ -1,5 +1,6 @@
 package backend.academy.userinterface.impl;
 
+import backend.academy.constants.Config;
 import backend.academy.constants.InterfaceTemplates;
 import backend.academy.constants.enums.Describable;
 import backend.academy.constants.enums.GeneratorType;
@@ -57,9 +58,9 @@ public class UserInterfaceImpl implements UserInterface {
 
     public int getHeight() {
         int height = 0;
-        while (height < 3) {
+        while (height < Config.MIN_SIZE) {
             height = getValidUserInput("Введите высоту: ");
-            if (height <= 2) {
+            if (height <= Config.MIN_SIZE - 1) {
                 write("Высота должна быть больше двойки.");
             }
         }
@@ -68,10 +69,10 @@ public class UserInterfaceImpl implements UserInterface {
 
     public int getWidth() {
         int width = 0;
-        while (width < 2) {
+        while (width < Config.MIN_SIZE) {
             width = getValidUserInput("Введите ширину: ");
-            if (width <= 1) {
-                write("Ширина должна быть больше единицы.");
+            if (width <= Config.MIN_SIZE - 1) {
+                write("Ширина должна быть больше двойки.");
             }
         }
         return width;
